@@ -10,6 +10,14 @@ featureNames <- make.names(featureNames, unique=TRUE)
 
 # Appropriately cleans feature names to have descriptive variable names
 featureNames <- gsub("()", "", featureNames, fixed = TRUE)
+featureNames <- gsub("tBody", "time.domain.for.Body", featureNames, fixed = TRUE)
+featureNames <- gsub("fBody", "feature.domain.for.Body", featureNames, fixed = TRUE)
+featureNames <- gsub("Acc", ".Accelerometer.", featureNames, fixed = TRUE)
+featureNames <- gsub("Gyro", ".Gyroscope.", featureNames, fixed = TRUE)
+featureNames <- gsub("std", "standard.deviation", featureNames, fixed = TRUE)
+featureNames <- gsub("X", "in.the.X.axis.direction", featureNames, fixed = TRUE)
+featureNames <- gsub("Y", "in.the.Y.axis.direction", featureNames, fixed = TRUE)
+featureNames <- gsub("Z", "in.the.Z.axis.direction", featureNames, fixed = TRUE)
 
 activityData <- read.table(".\\UCI HAR Dataset\\activity_labels.txt", col.names=c("ID", "Activity")) ## read in feauture name data
 
@@ -31,7 +39,7 @@ testData <- cbind(subject_testData, Y_testData, X_testData)
 fullData <- rbind(trainData,testData)
 
 # Extracts only the measurements on the mean and standard deviation for each measurement
-selectData <- select(fullData, Subject, Activity_ID, contains("mean"),contains("std"))
+selectData <- select(fullData, Subject, Activity_ID, contains("mean"),contains("standard.deviation"))
 
 # Uses descriptive activity names to name the activities in the data set
 selectDescribeData <- merge(activityData,selectData,by.x = "ID",by.y = "Activity_ID")
@@ -50,6 +58,6 @@ library(memisc)
 Data <- data.set(tidyData)
 code.book <- codebook(Data)
 
-#sink(file = ".\\Getting-and-Cleaning-Data\\Codebook.md")
+sink(file = ".\\Getting-and-Cleaning-Data\\Codebook.md")
 code.book
 sink()

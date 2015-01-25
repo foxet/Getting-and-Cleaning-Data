@@ -11,6 +11,7 @@ featureNames <- make.names(featureNames, unique=TRUE)
 # Appropriately cleans feature names to have descriptive variable names
 featureNames <- gsub("()", "", featureNames, fixed = TRUE)
 featureNames <- gsub("tBody", "time.domain.for.Body", featureNames, fixed = TRUE)
+featureNames <- gsub("tGravity", "time.domain.for.Gravity", featureNames, fixed = TRUE)
 featureNames <- gsub("fBody", "feature.domain.for.Body", featureNames, fixed = TRUE)
 featureNames <- gsub("Acc", ".Accelerometer.", featureNames, fixed = TRUE)
 featureNames <- gsub("Gyro", ".Gyroscope.", featureNames, fixed = TRUE)
